@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    ports:
+      - "3600:3600"
+    networks:
+      - backend
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
